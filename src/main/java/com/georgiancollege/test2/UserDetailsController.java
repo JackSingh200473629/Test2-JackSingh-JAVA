@@ -8,6 +8,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
@@ -74,6 +75,10 @@ public class UserDetailsController implements Initializable {
             if (newSelection != null) {
                 updateAddressListView(newSelection.getAddress());
             }
+
+            if(newSelection != null){
+                updateImageView(newSelection.getImage());
+            }
         });
     }
 
@@ -85,6 +90,11 @@ public class UserDetailsController implements Initializable {
                 "Postal Code: " + user.getPostalCode(),
                 "State: " + user.getState()
         );
+    }
+
+    private void updateImageView(String imagePath){
+        Image userImage = new Image(imagePath);
+        imageView.setImage(userImage);
     }
 
     @FXML
