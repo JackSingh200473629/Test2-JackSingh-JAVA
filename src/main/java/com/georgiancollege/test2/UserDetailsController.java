@@ -69,6 +69,22 @@ public class UserDetailsController implements Initializable {
 
         int rowCount = tableView.getItems().size();
         noOfUsersLabel.setText("Number of users: " + rowCount);
+
+        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                updateAddressListView(newSelection.getAddress());
+            }
+        });
+    }
+
+    private void updateAddressListView(Address user) {
+        addressListView.getItems().clear();
+        addressListView.getItems().addAll(
+                "Address: " + user.getAddress(),
+                "City: " + user.getCity(),
+                "Postal Code: " + user.getPostalCode(),
+                "State: " + user.getState()
+        );
     }
 
     @FXML
