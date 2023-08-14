@@ -66,6 +66,9 @@ public class UserDetailsController implements Initializable {
         universityColumn.setCellValueFactory(new PropertyValueFactory<>("university"));
 
         tableView.getItems().addAll(apiResponse.getUsers());
+
+        int rowCount = tableView.getItems().size();
+        noOfUsersLabel.setText("Number of users: " + rowCount);
     }
 
     @FXML
