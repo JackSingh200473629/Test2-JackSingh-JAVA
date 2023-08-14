@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
@@ -54,6 +55,17 @@ public class UserDetailsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ApiResponse apiResponse = ApiUtility.getDataFromApi();
         System.out.println(apiResponse);
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        birthDateColumn.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+        universityColumn.setCellValueFactory(new PropertyValueFactory<>("university"));
+
+        tableView.getItems().addAll(apiResponse.getUsers());
     }
 
     @FXML

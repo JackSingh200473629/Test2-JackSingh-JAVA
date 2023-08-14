@@ -4,8 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
     private int id;
-    private String FirstName;
-    private String LastName;
+    @SerializedName("FirstName")
+    private String firstName;
+    @SerializedName("LastName")
+    private String lastName;
     private int age;
     private String email;
     @SerializedName("pHoNe")
@@ -20,11 +22,11 @@ public class User {
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public int getAge() {
