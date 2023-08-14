@@ -111,6 +111,7 @@ public class UserDetailsController implements Initializable {
         ApiResponse apiResponse = ApiUtility.getDataFromApi();
         tableView.getItems().addAll(apiResponse.getUsers());
         noOfUsersLabel.setText("No. of Users: " + filteredUsers.size());
+
     }
 
 
