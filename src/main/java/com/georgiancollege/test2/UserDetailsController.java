@@ -1,5 +1,7 @@
 package com.georgiancollege.test2;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,8 +13,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class UserDetailsController implements Initializable {
 
@@ -51,6 +56,9 @@ public class UserDetailsController implements Initializable {
 
     @FXML
     private ImageView imageView;
+
+    private ObservableList<User> allUsers = FXCollections.observableArrayList();
+    private ObservableList<User> filteredUsers;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -99,11 +107,19 @@ public class UserDetailsController implements Initializable {
 
     @FXML
     void allUsersButton_onClick(ActionEvent event) {
-
+        tableView.getSelectionModel().clearSelection();
+        ApiResponse apiResponse = ApiUtility.getDataFromApi();
+        tableView.getItems().addAll(apiResponse.getUsers());
+        noOfUsersLabel.setText("No. of Users: " + filteredUsers.size());
     }
+
 
     @FXML
     void usersLessThan50Button_onClick(ActionEvent event) {
-
+        filteredUsers = allUsers.stream().filter(user -> user.getAge() < 30)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        tableView.getSelectionModel().clearSelection();
+        tableView.setItems(filteredUsers);
+        noOfUsersLabel.setText("No. of Users: " + filteredUsers.size());
     }
 }
