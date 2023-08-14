@@ -52,7 +52,8 @@ public class UserDetailsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        ApiResponse apiResponse = ApiUtility.getDataFromApi();
+        System.out.println(apiResponse);
     }
 
     @FXML
